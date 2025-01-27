@@ -1,5 +1,6 @@
 const PORN_DATA = {
   names: {
+    yank: ["freedom daddy","cheeseburger chaser","Bud Light"],
     en: [
       "Big Cock", "Fuck me for a Buck", "Dirk Diggler", "Big Dick", "Give it to me", "Cock Sucker", "Up the Arse",
       "Cockboy", "Omar Pussy", "Fat Ass", "Superdick", "Mistress Shiva", "Bite Me", "Mistress Anal", "Long Finger", "Plugin", "Anal",
@@ -63,6 +64,7 @@ const PORN_DATA = {
   },
 
   prose: {
+    yank: ["invasion","flag","oil","sue"],
     en: [
       "fuck", "smooch", "smack", "peck", "unclefuck", "spank", "motherfuck", "deep throat", "ballbust", "spew", "dripp",
       "thrust", "cocksuck", "fistfuck", "fist", "suck", "squirt", "wank", "bang", "brown", "cuntlick", "cuntlapp", "felch",
@@ -207,15 +209,15 @@ function pornolize(text, language, swearibility) {
   return finalText;
 }
 
-function transformText(originalText) {
-  return pornolize(originalText,'en',80);
+function transformText(originalText,settings) {
+  return pornolize(originalText,settings.country,settings.sweariness);//settings.country,settings.sweariness);
 }
 
 /**
  * Recursively walk the DOM, looking for text nodes,
  * and apply a handler function to each text node.
  */
-function walk(node) {
+function walk(node,settings) {
   let child, next;
 
   switch (node.nodeType) {
@@ -225,12 +227,12 @@ function walk(node) {
       child = node.firstChild;
       while (child) {
         next = child.nextSibling;
-        walk(child);
+        walk(child,settings);
         child = next;
       }
       break;
     case 3: // Text node
-      handleText(node);
+      handleText(node,settings);
       break;
   }
 }
@@ -239,11 +241,13 @@ function walk(node) {
  * Handle a text node by transforming its text content
  * and overwriting the nodeValue with the result.
  */
-function handleText(textNode) {
+function handleText(textNode,settings) {
   const originalText = textNode.nodeValue;
-  const newText = transformText(originalText);
+  const newText = transformText(originalText,settings);
   textNode.nodeValue = newText;
 }
 
 // Start walking from the document's body
-walk(document.body);
+browser.storage.sync.get(['country', 'sweariness']).then(settings => {
+  walk(document.body,settings);
+});

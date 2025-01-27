@@ -3,6 +3,18 @@
   "name": "Pornolizer",
   "version": "1.0",
   "description": "Loops through all text content, passes it through a function, and replaces it.",
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "permissions": [
+    "storage"  // Needed to store/retrieve settings
+  ],
+   "browser_specific_settings": {
+    "gecko": {
+      "id": "pornolizer@dixon.rs"
+    }
+  },
   "icons": {
     "48": "icon.png"
   },

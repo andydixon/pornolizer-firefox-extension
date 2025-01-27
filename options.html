@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Pornolizer JS</title>
+</head>
+<body>
+  <h1>Extension Settings</h1>
+  
+  <!-- Dropdown for country -->
+  <label for="country">Select Country:</label>
+  <select id="country">
+    <option value="en">English (Actual English, not Simplified)</option>
+    <option value="yank">English (Simplified for Americans with 110% more freedom)</option>
+    <option value="de">Germany</option>
+    <option value="dk">Denmark</option>
+    <option value="es">Spain</option>
+    <option value="hr">Croatia</option>
+    <option value="hu">Hungary</option>
+    <option value="no">Norway</option>
+    <option value="se">Sweden</option>
+  </select>
+  <br><br>
+
+  <!-- Slider for "sweariness" level -->
+  <label for="sweariness">Sweariness (0-100):</label>
+  <input type="range" id="sweariness" min="0" max="100" step="1" value="50" />
+  <span id="swearinessValue">50</span>
+  <br><br>
+
+  <!-- Include your options.js script -->
+  <script src="options.js"></script>
+</body>
+</html>
